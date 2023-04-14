@@ -20,17 +20,17 @@ Route::get('/defaultView', function () {
     return view('welcome');
 });
 
-Route::prefix('home')->namespace('home')->controller(homeController::class)->group(function () {
-    Route::get('/' , 'index')->name('home.index');
-    Route::get('/' , 'filters')->name('home.filters');
+Route::prefix('home')->namespace('home')->group(function () {
+    Route::get('/' , [homeController::class, 'index'])->name('home.index');
+    Route::get('/filters' , [homeController::class, 'filters'])->name('home.filters');
 
 });
 
-Route::prefix('players')->namespace('players')->controller(playerController::class)->group(function () {
-    Route::get('/{id}', 'show')->name('players.show');
-    Route::get('/create', 'create')->name('players.create');
-    Route::post('/store', 'store')->name('players.store');
-    Route::get('/edit', 'edit')->name('players.edit');
-    Route::post('/update', 'update')->name('players.update');
-    Route::post('/delete', 'delete')->name('players.delete');
+Route::prefix('players')->namespace('players')->group(function () {
+    Route::get('/{id}', [playerController::class, 'show'])->name('players.show');
+    Route::get('/create', [playerController::class, 'create'])->name('players.create');
+    Route::post('/store', [playerController::class, 'store'])->name('players.store');
+    Route::get('/edit/{id}', [playerController::class, 'edit'])->name('players.edit');
+    Route::post('/update', [playerController::class, 'update'])->name('players.update');
+    Route::post('/delete', [playerController::class, 'delete'])->name('players.delete');
 });

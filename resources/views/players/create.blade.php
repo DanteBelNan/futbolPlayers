@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <h1> Bienvenido a la home blade </h1>
+<h1> Form de creación de un player </h1>
 
 @endsection
