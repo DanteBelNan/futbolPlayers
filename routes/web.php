@@ -22,7 +22,7 @@ Route::get('/defaultView', function () {
 
 Route::prefix('home')->namespace('home')->group(function () {
     Route::get('/' , [homeController::class, 'index'])->name('home.index');
-    Route::get('/filters' , [homeController::class, 'filters'])->name('home.filters');
+    Route::get('/' , [homeController::class, 'filters'])->name('home.filters');
 
 });
 
