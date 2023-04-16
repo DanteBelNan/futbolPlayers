@@ -10,7 +10,6 @@
 .sidebar__main {
     /* Take the remaining width */
     flex: 1;
-    border: 2px solid black;
 }
 
 .card-layout {
@@ -33,18 +32,23 @@
     gap: 20px;
   }
 
+  .card-container a{
+    text-decoration: none;
+    color: #000;
+  }
+
 .card-layout__item {
     width: 100%;
     transition: width 0.3s ease;
     flex-basis: 32.33332%;
     padding: 0;
-    border: 2px solid black;
     transition: all 0.5s ease-in-out;
   }
 
   .card-layout__item:hover {
     transform: scale(1.1);
     z-index: 1;
+    border: 2px solid black;
     opacity: 0.8;
   }
   

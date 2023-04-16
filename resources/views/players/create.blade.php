@@ -88,7 +88,7 @@
 
     <div>
         <label for="diestro">Diestro:</label>
-        <input type="checkbox" name="diestro" value="1" checked>
+        <input type="checkbox" name="diestro" value="1">
     </div>
 
     <div>

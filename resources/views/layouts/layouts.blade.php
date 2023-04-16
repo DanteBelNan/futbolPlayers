@@ -17,11 +17,12 @@
 
     <!-- nav -->
 
-    @yield('content');
+    @yield('content')
 
     <!-- footer -->
 
     <!-- script -->
+
     
 </body>
 </html>

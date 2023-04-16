@@ -99,20 +99,57 @@ class playerController extends Controller
 
         
     }
-    public function edit($id){
+    public function edit(Request $request){
         //editar un plyr
-        $player = new Player;
-        $player::find($id);
+        $id = $request->input('id');
+        $player = Player::findOrFail($id);
         //en lugar de retornar el id, se debe retornar el objeto usuarios, cuando este la migración hecha
-        return view('players/edit', compact($player));
+        return view('players/edit', compact('player'));
     }
-    public function update(){
+    public function update(Request $request){
         //guardar un plyr editado
-        $player = new Player;
+        $id = $request->input('id');
+        $player = Player::findOrFail($id);
+
+        $player->fill($request->all());
+        if ($request->hasFile('avatar')) {
+            $oldAvatar = $player->avatar;
+            if (file_exists($oldAvatar)) {
+                unlink($oldAvatar);
+            }
+            $avatar = $request->file('avatar');
+            $filename = 'player_' . $player->name . '.' . $avatar->getClientOriginalExtension();
+            $path = public_path('avatars/custom/' . $filename);
+            Image::make($avatar->getRealPath())->resize(500, 500)->save($path);
+            $player->avatar = 'avatars/custom/' . $filename;
+        }
+        $player->diestro = boolval($request->input('diestro'));
+        $player->zurdo = boolval($request->input('diestro'));
+        $player->save();
+
+        return redirect()->route('home.index')->with('success', 'Jugador ' . $player->name . 'editado correctamente.');
     }
 
-    public function delete(){
-        //borrar un plyr
-        $player = new Player;
+    public function delete(Request $request){
+        //editar un plyr
+        $id = $request->input('id');
+        $player = Player::findOrFail($id);
+        
+        //en lugar de retornar el id, se debe retornar el objeto usuarios, cuando este la migración hecha
+        return view('players/delete', compact('player'));
     }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->input('id');
+        $player = Player::find($id);
+        $avatar = $player->avatar;
+        if ($avatar !== null) {
+            unlink($avatar);
+        }
+        $player->delete();
+        return redirect()->route('home.index')->with('success', 'Jugador ' . $player->name . 'eliminado correctamente.');
+    }
+    
+    
 }

@@ -31,6 +31,7 @@ Route::prefix('players')->namespace('players')->group(function () {
     Route::post('/store', [playerController::class, 'store'])->name('players.store');
     Route::get('/edit/{id}', [playerController::class, 'edit'])->name('players.edit');
     Route::post('/update', [playerController::class, 'update'])->name('players.update');
+    Route::get('/delete/{id}' , [playerController::class, 'delete'])->name('players.delete');
+    Route::delete('/destroy', [playerController::class, 'destroy'])->name('players.destroy');
     Route::get('/{id}', [playerController::class, 'show'])->name('players.show');
-    Route::post('/delete', [playerController::class, 'delete'])->name('players.delete');
 });

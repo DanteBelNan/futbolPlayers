@@ -1,0 +1,10 @@
+.split-screen {
+    display: flex;
+    height: 90vh;
+}
+
+.split-screen__half {
+    width: 50%;
+    max-width: 50%;
+    margin: 0;
+}

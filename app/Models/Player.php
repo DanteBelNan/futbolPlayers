@@ -11,4 +11,20 @@ class Player extends Model
 
     //Por defecto agarra la tabla players, pero si quisiese dejarlo fijado seria con
     //protected $table = "player";
+    protected $fillable = [
+        'name',
+        'desc',
+        'numero',
+        'posicion1',
+        'posicion2',
+        'posicion3',
+        'posicion4',
+        'skill',
+        'diestro',
+        'zurdo',
+        'goals',
+        'assists',
+        'shutout',
+        'amountGames',
+    ];
 }
