@@ -7,6 +7,11 @@
         {{ session('status') }}
     </div>
 @endif
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div class="sidebar">
     <!-- Sidebar -->
