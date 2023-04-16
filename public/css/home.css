@@ -1,0 +1,42 @@
+.sidebar {
+    display: flex;
+}
+
+.sidebar__sidebar {
+    width: 15%;
+    border: 2px solid black;
+}
+
+.sidebar__main {
+    /* Take the remaining width */
+    flex: 1;
+    border: 2px solid black;
+    /* Make it scrollable */
+    overflow: auto;
+}
+
+.card-layout {
+    display: flex;
+
+    /* Put a card in the next row when previous cards take all width */
+    flex-wrap: wrap;
+
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+}
+
+.card-layout__item {
+    /* There will be 3 cards per row */
+    flex-basis: 33.33333%;
+
+    padding-left: 0.20rem;
+    
+    padding-right: 0.20rem;
+
+    border: 2px solid black;
+    opacity: 0.8;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+}
+

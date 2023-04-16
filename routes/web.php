@@ -22,15 +22,15 @@ Route::get('/defaultView', function () {
 
 Route::prefix('home')->namespace('home')->group(function () {
     Route::get('/' , [homeController::class, 'index'])->name('home.index');
-    Route::get('/' , [homeController::class, 'filters'])->name('home.filters');
+    Route::get('/filters' , [homeController::class, 'filters'])->name('home.filters');
 
 });
 
 Route::prefix('players')->namespace('players')->group(function () {
-    Route::get('/{id}', [playerController::class, 'show'])->name('players.show');
     Route::get('/create', [playerController::class, 'create'])->name('players.create');
     Route::post('/store', [playerController::class, 'store'])->name('players.store');
     Route::get('/edit/{id}', [playerController::class, 'edit'])->name('players.edit');
     Route::post('/update', [playerController::class, 'update'])->name('players.update');
+    Route::get('/{id}', [playerController::class, 'show'])->name('players.show');
     Route::post('/delete', [playerController::class, 'delete'])->name('players.delete');
 });
