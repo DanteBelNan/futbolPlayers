@@ -23,7 +23,7 @@ Route::get('/defaultView', function () {
 Route::prefix('home')->namespace('home')->group(function () {
     Route::get('/' , [homeController::class, 'index'])->name('home.index');
     Route::get('/filters' , [homeController::class, 'filters'])->name('home.filters');
-
+    Route::post('/mixTeams' , [homeController::class, 'mixTeams'])->name('home.mixTeams');
 });
 
 Route::prefix('players')->namespace('players')->group(function () {

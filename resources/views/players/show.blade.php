@@ -29,7 +29,8 @@
                 @endif
                 <p class="card-text">Edad: {{ $player->age }}</p>
                 <p class="card-text">Altura: {{ $player->height }} cm</p>
-                <p class="card-text">Diestro/Zurdo: {{ $player->diestro ? 'Diestro' : 'Zurdo' }}</p>
+                <p class="card-text">Diestro/Zurdo: {{ $player->diestro && $player->zurdo ? 'Ambidiestro' : ($player->diestro ? 'Diestro' : 'Zurdo') }}</p>
+
                 <p class="card-text">Goles: {{ $player->goals ?? 0 }}</p>
                 <p class="card-text">Asistencias: {{ $player->assists ?? 0 }}</p>
                 <p class="card-text">Partidos jugados: {{ $player->amountGames ?? 0 }}</p>

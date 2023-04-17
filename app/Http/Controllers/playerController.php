@@ -124,7 +124,7 @@ class playerController extends Controller
             $player->avatar = 'avatars/custom/' . $filename;
         }
         $player->diestro = boolval($request->input('diestro'));
-        $player->zurdo = boolval($request->input('diestro'));
+        $player->zurdo = boolval($request->input('zurdo'));
         $player->save();
 
         return redirect()->route('home.index')->with('success', 'Jugador ' . $player->name . 'editado correctamente.');

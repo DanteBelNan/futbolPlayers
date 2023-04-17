@@ -76,4 +76,20 @@
   }
   
 
+  .search-box {
+    display: flex;
+
+    /* If you want to place the icon before the text input */
+    flex-direction: row-reverse;
+
+    /* Border */
+    border: 1px solid #d1d5db;
+}
+
+.search-box__input {
+    border-color: transparent;
+    /* Take available width */
+    flex: 1;
+}
+
 
