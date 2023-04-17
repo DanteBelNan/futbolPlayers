@@ -27,9 +27,8 @@
                 @if ($player->posicion4)
                 <p class="card-text">Posición 4: {{ $player->posicion4 }}</p>
                 @endif
-                <p class="card-text">Edad: {{ $player->age }}</p>
                 <p class="card-text">Altura: {{ $player->height }} cm</p>
-                <p class="card-text">Diestro/Zurdo: {{ $player->diestro && $player->zurdo ? 'Ambidiestro' : ($player->diestro ? 'Diestro' : 'Zurdo') }}</p>
+                <p class="card-text">Pierna: {{ $player->diestro && $player->zurdo ? 'Ambas' : ($player->diestro ? 'Derecho' : 'Izquierda') }}</p>
 
                 <p class="card-text">Goles: {{ $player->goals ?? 0 }}</p>
                 <p class="card-text">Asistencias: {{ $player->assists ?? 0 }}</p>

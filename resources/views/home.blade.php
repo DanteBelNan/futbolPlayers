@@ -17,7 +17,7 @@
     <!-- Sidebar -->
     <aside class="sidebar__sidebar">
     <h3> SearchBar: </h3>
-        <form method="GET" action="{{ route('home.filters')}}">
+        <form method="GET" action="{{ route('home.filters')}}" id='filters'>
             @csrf
             <div class="search-box">
                 <input type="text" class="search-box__input" name="query" />
@@ -174,30 +174,31 @@
     <hr>
     
     
+    <h3>Crear un partido </h3>
+    <select name="cancha" required form="mixTeams">
+        <option value="" selected disabled>Tipo de cancha</option>
+        <option value="5">FUTBOL 5</option>
+        <option value="6">FUTBOL 6</option>
+        <option value="8">FUTBOL 8</option>
+        <option value="11">FUTBOL 11</option>
+    </select>
+    <button type="submit" form="mixTeams">Crear partido</button>
     <p>Mostrando {{count($players)}} jugadores </p>
 </aside>
 
 <!-- Main -->
+
 <main class="sidebar__main">
-    <form action="{{ route('home.mixTeams') }}" method="post">
+    <form action="{{ route('home.mixTeams') }}" method="post" id='mixTeams'>
         @csrf
-        <h3>Crear un partido </h3>
-        <select name="cancha" required>
-            <option value="" selected disabled>Tipo de cancha</option>
-            <option value="5">FUTBOL 5</option>
-            <option value="6">FUTBOL 6</option>
-            <option value="8">FUTBOL 8</option>
-            <option value="11">FUTBOL 11</option>
-        </select>
-        <button type="submit">Crear partido</button>
-        
         <div class="card-layout">
             @if(!is_null($players))
             
-            @foreach ($players as $player)
+            @foreach ($players as $key => $player)
             <div class="card-container">
                 <label for="player-{{ $player->id }}" class="card-checkbox-label">
-                  <div class="card-layout__item clickable">
+                    {{isset($checkbox['zurdo']) ? 'checked' : ''}}
+                    <div class="card-layout__item {{ isset($checkbox['id'][$player->id]) ? 'clicked' : 'clickable' }}">
                     <div class="card-layout__header">
                       <h3>{{ $player->name }}</h3>
                       <p>Position: {{ $player->posicion1 }}</p>

@@ -16,7 +16,8 @@ class homeController extends Controller
             'posiciones3' => [],
             'posiciones4' => [],
             'skill' => [],
-            'pierna' => []
+            'pierna' => [],
+            'id' => []
         ];
         return view('home', compact('players', 'checkbox'));
     }
@@ -30,9 +31,11 @@ class homeController extends Controller
             'posiciones4' => $request->input('posiciones4') ? $request->input('posiciones4') : [],
             'diestro' => $request->input('diestro')?? $request->input('diestro') ,
             'zurdo' => $request->input('zurdo') ?? $request->input('zurdo')  ,
-            'skill' => []
+            'skill' => [],
+            'id' => $request->input('player') ?? $request->input('player') 
         ];
-
+        $id = $request->input('id');
+        dd($id);
         $posiciones1 = $request->input('posiciones1');
         $posiciones2 = $request->input('posiciones2');
         $posiciones3 = $request->input('posiciones3');
@@ -80,17 +83,16 @@ class homeController extends Controller
 
     public function mixTeams(Request $request){
         $ids = $request->input('player');
-
         if(is_null($ids)){
             return redirect()->route('home.index')->with('status', 'Debes seleccionar jugadores para crear un partido');
         }
         $numPlayers = count($ids);
         $cancha = $request->input('cancha');
         if($cancha * 2 > $numPlayers){
-            return redirect()->route('home.index')->with('status', 'Faltan ' . $cancha * 2 - $numPlayers . 'jugadores para armar equipos de un futbol ' . $cancha);
+            return redirect()->route('home.index')->with('status', 'Faltan ' . $cancha * 2 - $numPlayers . ' jugadores para armar equipos de un futbol ' . $cancha);
         }
         if($cancha * 2 < $numPlayers){
-            return redirect()->route('home.index')->with('status', 'Sobran ' . $numPlayers - $cancha * 2  . 'jugadores para armar equipos de un futbol ' . $cancha);
+            return redirect()->route('home.index')->with('status', 'Sobran ' . $numPlayers - $cancha * 2  . ' jugadores para armar equipos de un futbol ' . $cancha);
         }
 
         $players = [];
@@ -110,7 +112,7 @@ class homeController extends Controller
             }
         }
         if(count($arqueros)>2){
-            return redirect()->route('home.index')->with('status', 'Sobran ' . count($arqueros) -2  . 'arqueros');
+            return redirect()->route('home.index')->with('status', 'Sobran ' . count($arqueros) -2  . ' arqueros');
         }
         if(count($arqueros) < 2){
             foreach($players as $key => $player){
@@ -142,8 +144,8 @@ class homeController extends Controller
                 }
             }
         }
-        if(count($arqueros)==0){
-            return redirect()->route('home.index')->with('status', 'Falta ' . 2 - count($arqueros)  . 'arqueros para armar el equipo');
+        if(count($arqueros)<2){
+            return redirect()->route('home.index')->with('status', 'Falta ' . 2 - count($arqueros)  . ' arqueros para armar el equipo');
         }
 
         $team1 = [];
@@ -167,8 +169,6 @@ class homeController extends Controller
                 $team1_media += $player->skill; // sumar habilidades
             }
         }
-        
-       
 
         
         if(count($team1) == count($team2)){
