@@ -16,13 +16,15 @@
     <!-- header -->
 
     <!-- nav -->
-
+    <nav class="navbar">
+        <a class="navbar-brand" href="{{ route('home.index') }}" style="text-decoration: none; color: #000;">Home</a>
+    </nav>
     @yield('content')
 
     <!-- footer -->
 
     <!-- script -->
-
+    <script src="{{ asset('js/clickCard.js') }}"></script>
     
 </body>
 </html>

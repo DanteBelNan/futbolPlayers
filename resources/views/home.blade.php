@@ -172,52 +172,57 @@
             <button type="submit">Crear nuevo jugador</button>
         </form>
     <hr>
-        <form action="{{ route('home.mixTeams') }}" method="post">
-            @csrf
-            <h3>Crear un partido </h3>
-            <select name="cancha" required>
-                <option value="" selected disabled>Tipo de cancha</option>
-                <option value="5">FUTBOL 5</option>
-                <option value="6">FUTBOL 6</option>
-                <option value="8">FUTBOL 8</option>
-                <option value="11">FUTBOL 11</option>
-            </select>
-            <button type="submit">Crear partido</button>
-        </form>
-            
-            
-            <p>Mostrando {{count($players)}} jugadores </p>
-        </aside>
+    
+    
+    <p>Mostrando {{count($players)}} jugadores </p>
+</aside>
+
+<!-- Main -->
+<main class="sidebar__main">
+    <form action="{{ route('home.mixTeams') }}" method="post">
+        @csrf
+        <h3>Crear un partido </h3>
+        <select name="cancha" required>
+            <option value="" selected disabled>Tipo de cancha</option>
+            <option value="5">FUTBOL 5</option>
+            <option value="6">FUTBOL 6</option>
+            <option value="8">FUTBOL 8</option>
+            <option value="11">FUTBOL 11</option>
+        </select>
+        <button type="submit">Crear partido</button>
         
-    <!-- Main -->
-    <main class="sidebar__main">
-
         <div class="card-layout">
-        @if(!is_null($players))
-
+            @if(!is_null($players))
+            
             @foreach ($players as $player)
             <div class="card-container">
-            <input type="checkbox" name="player[]" value="{{ $player->id }}">
-            <a href="{{ route('players.show', $player->id) }}">
-                <div class="card-layout__item">
+                <label for="player-{{ $player->id }}" class="card-checkbox-label">
+                  <div class="card-layout__item clickable">
                     <div class="card-layout__header">
-                        <h3>{{ $player->name }}</h3>
-                        <p>Position: {{ $player->posicion1 }}</p>
-                        <p>Skill: {{ $player->skill }}</p>
+                      <h3>{{ $player->name }}</h3>
+                      <p>Position: {{ $player->posicion1 }}</p>
+                      <p>Skill: {{ $player->skill }}</p>
                     </div>
                     <div class="card-layout__image" style="background-image: url({{ asset(($player->avatar ?? 'avatars/default/defaultImage.png')) }})">
                     </div>
                     <div class="card-layout__footer">
-                        </div>
-                </div>
-            </a>
-            </div>
+                      <a href="{{ route('players.show', $player->id) }}">
+                        Ver mas
+                      </a>
+                    </div>
+                  </div>
+                </label>
+                <input type="checkbox" id="player-{{ $player->id }}" name="player[]" value="{{ $player->id }}" class="card-checkbox">
+              </div>
+              
             
             @endforeach
             @else
             <p>No players found.</p>
             @endif
-
+            
+        </form>
+    </div> 
     </main>
 </div>
 

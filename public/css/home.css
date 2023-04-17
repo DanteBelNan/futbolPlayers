@@ -22,74 +22,85 @@
     margin-right: -0.25rem;
 }
 
-.card-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
+.card-checkbox-label {
+  cursor: pointer;
+}
 
-  .card-container a{
-    text-decoration: none;
-    color: #000;
-  }
+.card-checkbox {
+  display: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clicked {
+  background-color: rgba(90, 236, 90, 0.856);
+}
+
+
+.card-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  pointer-events: auto;
+}
 
 .card-layout__item {
-    width: 100%;
-    transition: width 0.3s ease;
-    flex-basis: 32.33332%;
-    padding: 0;
-    transition: all 0.5s ease-in-out;
-  }
+  width: 100%;
+  transition: width 0.3s ease;
+  flex-basis: 32.33332%;
+  padding: 0;
+  transition: all 0.5s ease-in-out;
+}
 
-  .card-layout__item:hover {
-    transform: scale(1.1);
-    z-index: 1;
-    border: 2px solid black;
-    opacity: 0.8;
-  }
-  
-  .card-layout__item:hover img {
-    transform: scale(1.1);
-  }
+.card-layout__item:hover {
+  transform: scale(1.1);
+  z-index: 1;
+  border: 2px solid black;
+  opacity: 0.8;
+}
 
-  .card-layout__item img {
-    transition: all 0.5s ease-in-out;
-  }
+.card-layout__item:hover img {
+  transform: scale(1.1);
+}
 
-  .card-layout__header {
-    background-color: white;
-  }
-  
-  .card-layout__image {
-    height: 350px; /* Altura de la sección de la imagen */
-    width: 350px;
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .card-layout__footer {
-    background-color: white;
-  }
-  
+.card-layout__item img {
+  transition: all 0.5s ease-in-out;
+}
 
-  .search-box {
-    display: flex;
+.card-layout__header {
+  background-color: none;
+  text-align: center;
+}
 
-    /* If you want to place the icon before the text input */
-    flex-direction: row-reverse;
+.card-layout__image {
+  height: 350px;
+  width: 350px;
+  background-size: cover;
+  background-position: center;
+}
 
-    /* Border */
-    border: 1px solid #d1d5db;
+.card-layout__footer {
+  background-color: none;
+  text-align: center;
+}
+
+
+.search-box {
+  display: flex;
+  flex-direction: row-reverse;
+  border: 1px solid #d1d5db;
 }
 
 .search-box__input {
-    border-color: transparent;
-    /* Take available width */
-    flex: 1;
+  border-color: transparent;
+  flex: 1;
 }
 
 
