@@ -17,6 +17,7 @@
 <div class="sidebar_teams">
     <!-- Sidebar -->
     <aside class="sidebar__sidebar_teams">
+        <h1> Equipo 1 </h1> 
         <p> Promedio nivel: {{$team1_prom}} </p>
         <div class="card-layout">
             @if(!is_null($team1))
@@ -116,6 +117,7 @@
 
 <!-- Main -->
 <main class="sidebar__main_teams">
+        <h1>Equipo 2 </h1>
         <p> Promedio nivel: {{$team2_prom}} </p>
         <div class="card-layout">
             @if(!is_null($team2))

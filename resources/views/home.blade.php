@@ -16,12 +16,26 @@
 <div class="sidebar">
     <!-- Sidebar -->
     <aside class="sidebar__sidebar">
+        
+        <h3>Crear un partido </h3>
+    <select name="cancha" required form="mixTeams">
+        <option value="" selected disabled>Tipo de cancha</option>
+        <option value="5">FUTBOL 5</option>
+        <option value="6">FUTBOL 6</option>
+        <option value="8">FUTBOL 8</option>
+        <option value="11">FUTBOL 11</option>
+    </select>
+    <button type="submit" form="mixTeams">Crear partido</button>
+    <p>Mostrando {{count($players)}} jugadores </p>
+
+    <hr>
+
     <h3> SearchBar: </h3>
         <form method="GET" action="{{ route('home.filters')}}" id='filters'>
             @csrf
             <div class="search-box">
                 <input type="text" class="search-box__input" name="query" />
-                <button type='submit'>Buscar</button>
+                <button type='submit' onclick="return validateForm()">Buscar</button>
             </div>
             {{isset($search) ? 'Mostrando resultados de: '. $search : ''}}
     <hr>
@@ -163,7 +177,11 @@
                 ZURDO
                 </label>
             </div>
-            <button type="submit">Apply filters</button>
+            @foreach ($playersIds as $key =>$player)
+            
+            <input type="checkbox" id="player-{{ $key }}" name="playercheck[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display: none'>
+            @endforeach
+            <button type="submit" >Apply filters</button>
         </form>
     <hr>
 
@@ -174,27 +192,23 @@
     <hr>
     
     
-    <h3>Crear un partido </h3>
-    <select name="cancha" required form="mixTeams">
-        <option value="" selected disabled>Tipo de cancha</option>
-        <option value="5">FUTBOL 5</option>
-        <option value="6">FUTBOL 6</option>
-        <option value="8">FUTBOL 8</option>
-        <option value="11">FUTBOL 11</option>
-    </select>
-    <button type="submit" form="mixTeams">Crear partido</button>
-    <p>Mostrando {{count($players)}} jugadores </p>
+
 </aside>
 
 <!-- Main -->
 
 <main class="sidebar__main">
     <form action="{{ route('home.mixTeams') }}" method="post" id='mixTeams'>
+        @foreach ($playersIds as $key =>$player)
+            
+        <input type="checkbox" id="player-{{ $key }}" name="playercheck2[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display: none'>
+        @endforeach
         @csrf
         <div class="card-layout">
             @if(!is_null($players))
             
             @foreach ($players as $key => $player)
+            
             <div class="card-container">
                 <label for="player-{{ $player->id }}" class="card-checkbox-label">
                     {{isset($checkbox['zurdo']) ? 'checked' : ''}}
@@ -213,7 +227,7 @@
                     </div>
                   </div>
                 </label>
-                <input type="checkbox" id="player-{{ $player->id }}" name="player[]" value="{{ $player->id }}" class="card-checkbox">
+                <input type="checkbox" id="player-{{ $player->id }}" name="player[]" value="{{ $player->id }}" class="card-checkbox"  {{ $playersIds[$player->id] ? 'checked' : '' }}>
               </div>
               
             

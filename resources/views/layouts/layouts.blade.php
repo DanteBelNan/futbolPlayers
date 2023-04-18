@@ -25,6 +25,7 @@
 
     <!-- script -->
     <script src="{{ asset('js/clickCard.js') }}"></script>
+    <script src="{{ asset('js/updateCheckboxes.js') }}"></script>
     
 </body>
 </html>

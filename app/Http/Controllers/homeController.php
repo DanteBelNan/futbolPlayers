@@ -19,7 +19,10 @@ class homeController extends Controller
             'pierna' => [],
             'id' => []
         ];
-        return view('home', compact('players', 'checkbox'));
+        $playersIds = $players->pluck('id')->mapWithKeys(function ($id) {
+            return [$id => false];
+        })->toArray();
+        return view('home', compact('players', 'checkbox' , 'playersIds'));
     }
 
     public function filters(Request $request){
@@ -32,10 +35,21 @@ class homeController extends Controller
             'diestro' => $request->input('diestro')?? $request->input('diestro') ,
             'zurdo' => $request->input('zurdo') ?? $request->input('zurdo')  ,
             'skill' => [],
-            'id' => $request->input('player') ?? $request->input('player') 
+            'id' => $request->input('playercheck') ?? $request->input('playercheck') 
         ];
-        $id = $request->input('id');
-        dd($id);
+        $id = $request->input('playercheck');
+        $playersIds = $players->pluck('id')->mapWithKeys(function ($id) {
+            return [$id => false];
+        })->toArray();
+        if(!is_null($checkbox['id'])){
+            $checkbox['id'] = array_combine($id, array_fill(0, count($id), true));
+        }
+        foreach ($playersIds as $key => $value) {
+            if (isset($checkbox['id'][$key])) {
+                $playersIds[$key] = true;
+            }
+        }
+        
         $posiciones1 = $request->input('posiciones1');
         $posiciones2 = $request->input('posiciones2');
         $posiciones3 = $request->input('posiciones3');
@@ -78,24 +92,25 @@ class homeController extends Controller
         })
         ->get();
 
-        return view('home', compact('players' , 'checkbox'));
+        return view('home', compact('players' , 'checkbox', 'playersIds'));
     }
 
     public function mixTeams(Request $request){
-        $ids = $request->input('player');
+        $ids = $request->input('playercheck2');
         if(is_null($ids)){
             return redirect()->route('home.index')->with('status', 'Debes seleccionar jugadores para crear un partido');
         }
         $numPlayers = count($ids);
         $cancha = $request->input('cancha');
         if($cancha * 2 > $numPlayers){
-            return redirect()->route('home.index')->with('status', 'Faltan ' . $cancha * 2 - $numPlayers . ' jugadores para armar equipos de un futbol ' . $cancha);
+            return redirect()->back()->with('status', 'Faltan ' . $cancha * 2 - $numPlayers . ' jugadores para armar equipos de un futbol ' . $cancha);
         }
         if($cancha * 2 < $numPlayers){
-            return redirect()->route('home.index')->with('status', 'Sobran ' . $numPlayers - $cancha * 2  . ' jugadores para armar equipos de un futbol ' . $cancha);
+            return redirect()->back()->with('status', 'Faltan ' . $cancha * 2 - $numPlayers . ' jugadores para armar equipos de un futbol ' . $cancha);
         }
 
         $players = [];
+        
 
         foreach($ids as $id) {
             $player = Player::find($id);
@@ -103,7 +118,6 @@ class homeController extends Controller
                 $players[] = $player;
             }
         }
-
         $arqueros = [];
         foreach($players as $key => $player){
             if($player->posicion1 == "ARQUERO"){
@@ -112,7 +126,7 @@ class homeController extends Controller
             }
         }
         if(count($arqueros)>2){
-            return redirect()->route('home.index')->with('status', 'Sobran ' . count($arqueros) -2  . ' arqueros');
+            return redirect()->back()->with('status', 'Sobran ' . count($arqueros) -2  . ' arqueros');
         }
         if(count($arqueros) < 2){
             foreach($players as $key => $player){
@@ -145,7 +159,7 @@ class homeController extends Controller
             }
         }
         if(count($arqueros)<2){
-            return redirect()->route('home.index')->with('status', 'Falta ' . 2 - count($arqueros)  . ' arqueros para armar el equipo');
+            return redirect()->back()->with('status', 'Falta ' . 2 - count($arqueros)  . ' arqueros para armar el equipo');
         }
 
         $team1 = [];
@@ -160,15 +174,41 @@ class homeController extends Controller
         $team2[] = $arqueros[1];
         $team2_media += $arqueros[1]->skill;
 
-        foreach($players as $key => $player){
-            if($team1_media > $team2_media){
-                $team2[] = $player;
-                $team2_media += $player->skill; // sumar habilidades
-            }else{
-                $team1[] = $player;
-                $team1_media += $player->skill; // sumar habilidades
+        //burbujeo
+        $players = array_filter($players); //elimina espacios nulos
+        $players = array_values($players); //reindexa los espacios
+        for ($i = 0; $i < count($players) - 1; $i++) {
+            for ($j = 0; $j < count($players) - $i - 1; $j++) {
+                if ($players[$j]->skill < $players[$j + 1]->skill) {
+                    $temp = $players[$j];
+                    $players[$j] = $players[$j + 1];
+                    $players[$j + 1] = $temp;
+                }
             }
         }
+
+        if($team1_media < $team2_media){
+            foreach($players as $key => $player) {
+                if($key % 2 == 0) {
+                    $team1[] = $player;
+                    $team1_media += $player->skill;
+                } else {
+                    $team2[] = $player;
+                    $team2_media += $player->skill;
+                }
+            }
+        }else{
+            foreach($players as $key => $player) {
+                if($key % 2 == 0) {
+                    $team2[] = $player;
+                    $team2_media += $player->skill;
+                } else {
+                    $team1[] = $player;
+                    $team1_media += $player->skill;
+                }
+            }
+        }
+
 
         
         if(count($team1) == count($team2)){
@@ -176,7 +216,7 @@ class homeController extends Controller
             $team2_prom = $team2_media / $cancha;
             return view('teams', compact('team1' , 'team2' , 'team1_prom' , 'team2_prom'));
         }else{
-            return redirect()->route('home.index')->with('status', 'error inesperado, los equipos no tienen el mismo tamaño');
+            return redirect()->back()->with('status', 'error inesperado, los equipos no tienen el mismo tamaño');
         }
     }
 
