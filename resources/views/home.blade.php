@@ -179,7 +179,8 @@
             </div>
             @foreach ($playersIds as $key =>$player)
             
-            <input type="checkbox" id="player-{{ $key }}" name="playercheck[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style=''>
+            <!-- This inputs are for filters but if i change their name it explodes-->
+            <input type="checkbox" id="player-{{ $key }}" name="playercheck[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display:none'>
             @endforeach
             <button type="submit" >Apply filters</button>
         </form>
@@ -200,8 +201,8 @@
 <main class="sidebar__main">
     <form action="{{ route('home.mixTeams') }}" method="post" id='mixTeams'>
         @foreach ($playersIds as $key =>$player)
-            
-        <input type="checkbox" id="player-{{ $key }}" name="playercheck2[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display: none'>
+            <!-- This inputs are for mixTeams but if i change their name it explodes-->
+        <input type="checkbox" id="player-{{ $key }}" name="playercheck2[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display:none'>
         @endforeach
         @csrf
         <div class="card-layout">
@@ -227,6 +228,7 @@
                     </div>
                   </div>
                 </label>
+                <!-- This inputs are for card-painting but if i change their name it explodes-->
                 <input type="checkbox" id="player-{{ $player->id }}" name="player[]" value="{{ $player->id }}" class="card-checkbox"  {{ $playersIds[$player->id] ? 'checked' : '' }}>
               </div>
               
