@@ -1,6 +1,6 @@
-const checkboxes1 = document.querySelectorAll('input[name="playercheck[]"]');
-const checkboxes2 = document.querySelectorAll('input[name="player[]"]');
-const checkboxes3 = document.querySelectorAll('input[name="playercheck2[]"]');
+const checkboxes1 = document.querySelectorAll('input[name="filters[]"]');
+const checkboxes2 = document.querySelectorAll('input[name="playerCard[]"]');
+const checkboxes3 = document.querySelectorAll('input[name="mixTeams[]"]');
 
 // Función para actualizar los tres arrays de checkboxes
 function updateCheckboxes(event) {

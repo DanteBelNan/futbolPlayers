@@ -1,5 +1,10 @@
 @extends('layouts.layouts')
 
+@section('navbar')
+<a href="{{ route('players.create') }}" class="button">Crear nuevo jugador</a>
+
+@endsection
+
 @section('content')
 
 @if(session('status'))
@@ -16,7 +21,12 @@
 <div class="sidebar">
     <!-- Sidebar -->
     <aside class="sidebar__sidebar">
-        
+        <form action="{{ route('home.mixTeams') }}" method="post" id='mixTeams'>
+            @foreach ($playersIds as $key =>$player)
+            <input type="checkbox" id="player-{{ $key }}" name="mixTeams[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display:none'>
+            @endforeach
+            @csrf
+
         <h3>Crear un partido </h3>
     <select name="cancha" required form="mixTeams">
         <option value="" selected disabled>Tipo de cancha</option>
@@ -26,6 +36,7 @@
         <option value="11">FUTBOL 11</option>
     </select>
     <button type="submit" form="mixTeams">Crear partido</button>
+</form>
     <p>Mostrando {{count($players)}} jugadores </p>
 
     <hr>
@@ -180,7 +191,7 @@
             @foreach ($playersIds as $key =>$player)
             
             <!-- This inputs are for filters but if i change their name it explodes-->
-            <input type="checkbox" id="player-{{ $key }}" name="playercheck[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display:none'>
+            <input type="checkbox" id="player-{{ $key }}" name="filters[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display:none'>
             @endforeach
             <button type="submit" >Apply filters</button>
         </form>
@@ -199,12 +210,7 @@
 <!-- Main -->
 
 <main class="sidebar__main">
-    <form action="{{ route('home.mixTeams') }}" method="post" id='mixTeams'>
-        @foreach ($playersIds as $key =>$player)
-            <!-- This inputs are for mixTeams but if i change their name it explodes-->
-        <input type="checkbox" id="player-{{ $key }}" name="playercheck2[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display:none'>
-        @endforeach
-        @csrf
+
         <div class="card-layout">
             @if(!is_null($players))
             
@@ -217,7 +223,9 @@
                     <div class="card-layout__header">
                       <h3>{{ $player->name }}</h3>
                       <p>Position: {{ $player->posicion1 }}</p>
+                      <div class="playerSkill" name="playerSkill[]">
                       <p>Skill: {{ $player->skill }}</p>
+                      </div>
                     </div>
                     <div class="card-layout__image" style="background-image: url({{ asset(($player->avatar ?? 'avatars/default/defaultImage.png')) }})">
                     </div>
@@ -229,7 +237,7 @@
                   </div>
                 </label>
                 <!-- This inputs are for card-painting but if i change their name it explodes-->
-                <input type="checkbox" id="player-{{ $player->id }}" name="player[]" value="{{ $player->id }}" class="card-checkbox"  {{ $playersIds[$player->id] ? 'checked' : '' }}>
+                <input type="checkbox" id="player-{{ $player->id }}" name="playerCard[]" value="{{ $player->id }}" class="card-checkbox"  {{ $playersIds[$player->id] ? 'checked' : '' }}>
               </div>
               
             
@@ -238,7 +246,7 @@
             <p>No players found.</p>
             @endif
             
-        </form>
+
     </div> 
     </main>
 </div>

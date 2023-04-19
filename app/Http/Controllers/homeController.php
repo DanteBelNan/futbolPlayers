@@ -35,9 +35,9 @@ class homeController extends Controller
             'diestro' => $request->input('diestro')?? $request->input('diestro') ,
             'zurdo' => $request->input('zurdo') ?? $request->input('zurdo')  ,
             'skill' => [],
-            'id' => $request->input('playercheck') ?? $request->input('playercheck') 
+            'id' => $request->input('filters') ?? $request->input('filters') 
         ];
-        $id = $request->input('playercheck');
+        $id = $request->input('filters');
         $playersIds = $players->pluck('id')->mapWithKeys(function ($id) {
             return [$id => false];
         })->toArray();
@@ -96,7 +96,7 @@ class homeController extends Controller
     }
 
     public function mixTeams(Request $request){
-        $ids = $request->input('playercheck2');
+        $ids = $request->input('mixTeams');
         if(is_null($ids)){
             return redirect()->rback()->with('status', 'Debes seleccionar jugadores para crear un partido');
         }

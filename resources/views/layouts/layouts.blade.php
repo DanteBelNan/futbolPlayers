@@ -18,6 +18,8 @@
     <!-- nav -->
     <nav class="navbar">
         <a class="navbar-brand" href="{{ route('home.index') }}">Home</a>
+
+        @yield('navbar');   
     </nav>
     @yield('content')
 
