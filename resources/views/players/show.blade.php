@@ -50,9 +50,6 @@
     </div>
 </div>
 
-<form method="GET" action="{{ route('home.index') }}">
-    <button type="submit">Ir a la página de inicio</button>
-</form>
 
 @endsection
     

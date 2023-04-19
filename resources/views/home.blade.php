@@ -3,7 +3,7 @@
 @section('content')
 
 @if(session('status'))
-    <div class="alert alert-success">
+    <div class="alert alert-status">
         {{ session('status') }}
     </div>
 @endif
@@ -179,7 +179,7 @@
             </div>
             @foreach ($playersIds as $key =>$player)
             
-            <input type="checkbox" id="player-{{ $key }}" name="playercheck[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style='display: none'>
+            <input type="checkbox" id="player-{{ $key }}" name="playercheck[]" value="{{ $key }}" {{ $playersIds[$key] ? 'checked' : '' }} style=''>
             @endforeach
             <button type="submit" >Apply filters</button>
         </form>

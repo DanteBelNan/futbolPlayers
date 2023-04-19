@@ -24,7 +24,7 @@
 
             <div class="posicion_teams" style="width: 100%; ; text-align:center">
                 <p> Arquero </p>
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $team1[0]->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">
@@ -44,7 +44,7 @@
                 <p> Defensores: </p>
                 @foreach ($team1 as $player)
                 @if($player->posicion1 == "DEFENSOR")
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $player->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">
@@ -64,10 +64,10 @@
             </div>
 
             <div class="posicion_teams" style="width: 100%; ; text-align:center">
-                <p> Mediocampistas </p>
+                    <p> Mediocampistas </p>
                 @foreach ($team1 as $player)
                 @if($player->posicion1 == "MEDIOCAMPISTA")
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $player->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">
@@ -90,7 +90,7 @@
                 <p> Delanteros: </p>
                 @foreach ($team1 as $player)
                 @if($player->posicion1 == "DELANTERO")
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $player->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">
@@ -124,7 +124,7 @@
 
             <div class="posicion_teams" style="width: 100%; ; text-align:center">
                 <p> Arquero </p>
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $team2[0]->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">
@@ -144,7 +144,7 @@
                 <p> Defensores: </p>
                 @foreach ($team2 as $player)
                 @if($player->posicion1 == "DEFENSOR")
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $player->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">
@@ -167,7 +167,7 @@
                 <p> Mediocampistas </p>
                 @foreach ($team2 as $player)
                 @if($player->posicion1 == "MEDIOCAMPISTA")
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $player->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">
@@ -190,7 +190,7 @@
                 <p> Delanteros: </p>
                 @foreach ($team2 as $player)
                 @if($player->posicion1 == "DELANTERO")
-                <div class="card-container">
+                <div class="card-container__teams">
                     <a href="{{ route('players.show', $player->id) }}">
                         <div class="card-layout__item__teams">
                             <div class="card-layout__header">

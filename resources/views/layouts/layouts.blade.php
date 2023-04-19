@@ -17,7 +17,7 @@
 
     <!-- nav -->
     <nav class="navbar">
-        <a class="navbar-brand" href="{{ route('home.index') }}" style="text-decoration: none; color: #000;">Home</a>
+        <a class="navbar-brand" href="{{ route('home.index') }}">Home</a>
     </nav>
     @yield('content')
 

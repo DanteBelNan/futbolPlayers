@@ -98,7 +98,7 @@ class homeController extends Controller
     public function mixTeams(Request $request){
         $ids = $request->input('playercheck2');
         if(is_null($ids)){
-            return redirect()->route('home.index')->with('status', 'Debes seleccionar jugadores para crear un partido');
+            return redirect()->rback()->with('status', 'Debes seleccionar jugadores para crear un partido');
         }
         $numPlayers = count($ids);
         $cancha = $request->input('cancha');

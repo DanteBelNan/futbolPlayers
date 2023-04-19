@@ -57,18 +57,17 @@
   flex-basis: 32.33332%;
   padding: 0;
   transition: all 0.5s ease-in-out;
+  transform: scale(0.85);
 }
 
 .card-layout__item:hover {
-  transform: scale(1.1);
+  transform: scale(0.9);
   z-index: 1;
   border: 2px solid black;
   opacity: 0.8;
 }
 
-.card-layout__item:hover img {
-  transform: scale(1.1);
-}
+
 
 .card-layout__item img {
   transition: all 0.5s ease-in-out;
@@ -89,6 +88,7 @@
 .card-layout__footer {
   background-color: none;
   text-align: center;
+  text-decoration: none;
 }
 
 
@@ -101,6 +101,11 @@
 .search-box__input {
   border-color: transparent;
   flex: 1;
+}
+a{
+  background-color: none;
+  text-align: center;
+  text-decoration: none;
 }
 
 

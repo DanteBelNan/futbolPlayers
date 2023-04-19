@@ -1,0 +1,37 @@
+.navbar{
+    border: 1px solid #000000;
+    background-color: green;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar a{
+
+    text-decoration: none;
+    color: white;
+    background-color: rgb(24, 88, 24);
+    border: 1px solid #000000;
+    border-radius: 10%;
+    padding: 15px;
+    margin-left: 25px;
+}
+
+.navbar a:hover{
+    background-color: rgb(13, 44, 13);
+}
+
+.alert{
+    border: 1px solid #000000;
+    border-radius: 2%;
+    text-align: center;
+    margin: auto;
+    padding: 15px;
+}
+
+.alert-success{
+    background-color: rgb(31, 139, 31);
+}
+
+.alert-status{
+    background-color: rgba(212, 25, 25, 0.733);
+}
