@@ -57,6 +57,7 @@
   flex-basis: 32.33332%;
   padding: 0;
   transition: all 0.5s ease-in-out;
+  border: 2px solid black;
   transform: scale(0.85);
 }
 
@@ -76,6 +77,31 @@
 .card-layout__header {
   background-color: none;
   text-align: center;
+}
+
+.playerSkill {
+  display: inline-block;
+  color: white;
+  background-color: black;
+  padding: 10px;
+  border-radius: 100%;
+
+}
+
+.black{
+  background-color: black;
+}
+
+.red{
+  background-color: red;
+}
+
+.yellow{
+  background-color: yellow;
+}
+
+.green{
+  background-color: green;
 }
 
 .card-layout__image {
